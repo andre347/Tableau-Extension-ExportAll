@@ -1,7 +1,7 @@
 {
   "public": false,
-  "name": "Tableau-Extension-ExportAll",
-  "alias": ["exportallextension.theinformationlab.io"],
+  "name": "Tableau-Extension-ExportAll-Plus",
+  "alias": ["exportallextensionplus.theinformationlab.io"],
   "version": 2,
   "regions": ["all"],
   "routes": [

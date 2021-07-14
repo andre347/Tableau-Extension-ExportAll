@@ -69,6 +69,13 @@ function Extension (props) {
         props.updateFilename(filenameSettings);
       }
 
+      let showButtonSettings = tableau.extensions.settings.get('showButton');
+
+      if (showButtonSettings && showButtonSettings != null) {
+        console.log('[Extension.js] initializeAsync Existing showbutton state Found', showButtonSettings);
+        props.updateShowButton(showButtonSettings);
+      }
+
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -108,6 +115,13 @@ function Extension (props) {
       console.log('[Extension.js] refreshSettings Existing Filename Found', filenameSettings);
       props.updateFilename(filenameSettings);
     }
+
+     let showButtonSettings = tableau.extensions.settings.get('showButton');
+
+    if (showButtonSettings && showButtonSettings != null) {
+        console.log('[Extension.js] refreshSettings Existing showbutton state Found', showButtonSettings);
+        props.updateShowButton(showButtonSettings);
+      }
   }
 
   function configure () {
@@ -159,7 +173,7 @@ function Extension (props) {
   }
 
   return (
-    <ExportBtn label={props.label} style={props.style} disabled={props.disabled} export={clickExportHandler}></ExportBtn>
+    <ExportBtn label={props.label} style={props.style} disabled={props.disabled} showButton={props.showButton} export={clickExportHandler}></ExportBtn>
   );
 }
 

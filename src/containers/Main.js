@@ -19,6 +19,7 @@ class Main extends Component {
         disabled : true
       },
       isLoading: false,
+      showButton: true,
       filename: 'ExportAll',
       settingsChanged: false,
     };
@@ -71,6 +72,11 @@ class Main extends Component {
     this.setState({settingsChanged: state});
   }
 
+  showButtonHandler = (showBool) => {
+    console.log('[Main.js] Showbutton changed', showBool);
+    this.setState({showButton: JSON.parse(showBool)});
+  }
+
   resetSettingsHandler = () => {
     console.log('[Main.js] Reset Settings');
     this.setState({
@@ -82,6 +88,7 @@ class Main extends Component {
         disabled : true
       },
       isLoading: false,
+      showButton: true,
       filename: 'ExportAll',
       settingsChanged: false,
     });
@@ -96,11 +103,13 @@ class Main extends Component {
         style={this.state.button.style} 
         filename={this.state.filename} 
         disabled={this.state.button.disabled} 
+        showButton={this.state.showButton}
         updateMetaVersion={this.metaVersionChangedHandler}
         updateMeta={this.metaChangedHandler} 
         disableButton={this.buttonStateChangedHandler} 
         updateLabel={this.labelChangedHandler}  
         updateButtonStyle={this.buttonStyleChangedHandler} 
+        updateShowButton={this.showButtonHandler}
         updateFilename={this.filenameChangedHandler} />
     )
   }
@@ -113,12 +122,14 @@ class Main extends Component {
         style={this.state.button.style} 
         filename={this.state.filename} 
         enableSave={this.state.settingsChanged} 
+        showButton={this.state.showButton}
         updateMeta={this.metaChangedHandler} 
         disableButton={this.buttonStateChangedHandler} 
         updateLabel={this.labelChangedHandler} 
         changeSettings={this.settingsChangedHandler} 
         updateButtonStyle={this.buttonStyleChangedHandler} 
         updateFilename={this.filenameChangedHandler} 
+        updateShowButton={this.showButtonHandler}
         resetSettings={this.resetSettingsHandler}/>
     )
   }
@@ -139,13 +150,15 @@ class Main extends Component {
               meta={this.state.meta} 
               style={this.state.button.style} 
               filename={this.state.filename} 
-              enableSave={this.state.settingsChanged} 
+              enableSave={this.state.settingsChanged}
+              showButton={this.state.showButton} 
               updateMeta={this.metaChangedHandler} 
               disableButton={this.buttonStateChangedHandler} 
               updateLabel={this.labelChangedHandler} 
               changeSettings={this.settingsChangedHandler} 
               updateButtonStyle={this.buttonStyleChangedHandler} 
               updateFilename={this.filenameChangedHandler} 
+              updateShowButton={this.showButtonHandler}
               resetSettings={this.resetSettingsHandler}/>
           </Route>
           <Route path="/desktopexport">
@@ -159,11 +172,13 @@ class Main extends Component {
               style={this.state.button.style} 
               filename={this.state.filename} 
               disabled={this.state.button.disabled} 
+              showButton={this.state.showButton} 
               updateMetaVersion={this.metaVersionChangedHandler}
               updateMeta={this.metaChangedHandler} 
               disableButton={this.buttonStateChangedHandler} 
               updateLabel={this.labelChangedHandler}  
               updateButtonStyle={this.buttonStyleChangedHandler} 
+              updateShowButton={this.showButtonHandler}
               updateFilename={this.filenameChangedHandler} />
           </Route>
         </Switch>

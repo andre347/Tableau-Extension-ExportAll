@@ -28,3 +28,5 @@ Tableau Extension Export All.code-workspace
 .vercel/
 .vercel/project.json
 .vercel/README.txt
+
+.eslintcache

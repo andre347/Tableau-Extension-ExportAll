@@ -53,6 +53,9 @@ const setSettings = (type, value) => new Promise((resolve, reject) => {
     case 'version':
       settingKey = 'metaVersion';
       break;
+    case 'showButton':
+      settingKey = 'showButton';
+      break;
     default:
       settingKey = 'unknown';
   }

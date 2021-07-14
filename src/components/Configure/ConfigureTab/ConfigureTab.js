@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import { TextField, DropdownSelect } from '@tableau/tableau-ui';
+import { TextField, DropdownSelect, Checkbox } from '@tableau/tableau-ui';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -55,8 +55,9 @@ function ConfigureTab(props) {
         </Grid>
         <Grid item xs={12} className={classes.gridItem}>
           <React.Fragment>
+            <Checkbox checked={props.showButton}  style={{display: 'flex', marginBottom: 6}} onChange={(e) => props.updateShowButton(e.target.checked)}>Button {props.showButton ? 'enabled' : 'disabled'}</Checkbox>
             Set Button Style to:
-            <DropdownSelect kind='line' value={props.style} onChange={e => props.updateButtonStyle(JSON.stringify(e.target.value))} style={styleDropDown}>
+            <DropdownSelect disabled={!props.showButton} kind='line' value={props.style} onChange={e => props.updateButtonStyle(JSON.stringify(e.target.value))} style={styleDropDown}>
               <option>outline</option>
               <option>primary</option>
               <option>destructive</option>

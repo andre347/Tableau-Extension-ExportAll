@@ -67,6 +67,13 @@ function Configure(props) {
         props.updateFilename(filenameSettings);
       }
 
+      let showButtonSettings = tableau.extensions.settings.get('showButton');
+
+      if (showButtonSettings && showButtonSettings != null) {
+        console.log('[Configure.js] initializeDialogAsync Existing showbutton state Found', showButtonSettings);
+        props.updateShowButton(showButtonSettings);
+      }
+
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -161,18 +168,26 @@ function Configure(props) {
     props.changeSettings(true);
   }
 
+  function updateshowButtonHandler(boolean) {
+    console.log('[Configure.js] updateshowbutton', boolean);
+    props.updateShowButton(boolean);
+    props.changeSettings(true);
+  }
+
   function saveSettingsHandler() {
     console.log('[Configure.js] saveSettingsHandler - Saving Settings', props);
     const meta = props.meta;
     const label = props.label;
     const style = props.style;
     const filename = props.filename;
+    const showButton = props.showButton
     props.disableButton(false);
     console.log('[Configure.js] saveSettingsHandler - sheets', meta);
     setSettings('sheets', meta)
       .then(setSettings('label', label))
       .then(setSettings('style', style))
       .then(setSettings('filename', filename))
+      .then(setSettings('showButton', showButton))
       .then(saveSettings())
       .then((savedSettings) => {
         console.log('[Configure.js] Saved Settings', savedSettings);
@@ -205,7 +220,7 @@ function Configure(props) {
         ><div style={configBody}>
           { tab === 0 ? <SelectSheets sheets={props.meta} selectSheet={selectSheetHandler} changeOrder={changeSheetOrderHandler} changeName={changeSheetNameHandler} /> : null }
           { tab === 1 ? <SelectColumns sheets={props.meta} colSelect={selectColumnHandler} changeName={changeColumnNameHandler} changeOrder={changeColumnOrderHandler}/> : null }
-          { tab === 2 ? <ConfigureTab label={props.label} filename={props.filename} style={props.style} updateLabel={updateLabelHandler} updateButtonStyle={updateButtonStyleHandler} updateFilename={updateFilenameHandler}/> : null }
+          { tab === 2 ? <ConfigureTab label={props.label} filename={props.filename} style={props.style} showButton={props.showButton} updateLabel={updateLabelHandler} updateButtonStyle={updateButtonStyleHandler} updateFilename={updateFilenameHandler} updateShowButton={updateshowButtonHandler} /> : null }
         </div>
       </Tabs>
       <ActionButtons enableButton={props.enableSave} save={saveSettingsHandler} resetSettings={resetSettingsHandler} />
